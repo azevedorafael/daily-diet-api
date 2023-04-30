@@ -10,3 +10,5 @@ time node src/server.js
 
 npm install tsx -D
 npx tsx src/server.ts
+
+ npm i -D eslint @rocketseat/eslint-config
