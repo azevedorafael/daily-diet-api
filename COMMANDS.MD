@@ -12,3 +12,7 @@
 - npx tsx src/server.ts
 
 - npm i -D eslint @rocketseat/eslint-config
+
+- npm install knex sqlite3
+- npx knex migrate:make create-meals
+- npm run knex -- migrate:make create-meals
