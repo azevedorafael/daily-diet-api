@@ -16,3 +16,6 @@
 - npm install knex sqlite3
 - npx knex migrate:make create-meals
 - npm run knex -- migrate:make create-meals
+- npm run knex -- migrate:latest
+- npm run knex -- migrate:rolback
+- npm run knex -- migrate:up/down --migration-name.ts

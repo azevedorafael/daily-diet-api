@@ -6,9 +6,17 @@ const app = fastify()
 // GET, POST, PUT, PATCH, DELETE
 
 app.get('/hello', async () => {
-  const tables = await knex('sqlite_schema').select('*')
+  // const user = await knex('users')
+  //   .insert({
+  //     id: crypto.randomUUID(),
+  //     name: 'Test New',
+  //     created_at: new Date(),
+  //   })
+  //   .returning('*')
+  // const schema = await knex('sqlite_schema').select('*')
+  const users = await knex('users').select('*')
 
-  return tables
+  return users
 })
 
 app
