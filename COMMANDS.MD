@@ -19,3 +19,7 @@
 - npm run knex -- migrate:latest
 - npm run knex -- migrate:rolback
 - npm run knex -- migrate:up/down --migration-name.ts
+
+- npm i vitest -D
+- npx vitest
+- npm i supertest -D
