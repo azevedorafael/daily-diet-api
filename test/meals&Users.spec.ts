@@ -3,7 +3,7 @@ import { execSync } from 'node:child_process'
 import request from 'supertest'
 import { app } from '../src/app'
 
-describe('Meals routes', () => {
+describe('Meals & Users routes', () => {
   beforeAll(async () => {
     await app.ready()
   })
@@ -169,6 +169,64 @@ describe('Meals routes', () => {
         totalMealsAcountWithinDiet: 2,
         totalMealsAcountOutOfDiet: 0,
         bestSequenceWithinDiet: 2,
+      }),
+    )
+  })
+
+  it('should be able to create a new user', async () => {
+    await request(app.server)
+      .post('/users')
+      .send({
+        name: 'New Test User',
+      })
+      .expect(201)
+  })
+
+  it('should be able to list all users', async () => {
+    await request(app.server)
+      .post('/users')
+      .send({
+        name: 'New Test User',
+      })
+      .expect(201)
+
+    await request(app.server)
+      .post('/users')
+      .send({
+        name: 'John Doe',
+      })
+      .expect(201)
+
+    const listUsersResponse = await request(app.server).get('/users')
+    expect(listUsersResponse.statusCode).toEqual(200)
+    expect(listUsersResponse.body.users).toEqual([
+      expect.objectContaining({
+        name: 'New Test User',
+      }),
+      expect.objectContaining({
+        name: 'John Doe',
+      }),
+    ])
+  })
+
+  it('should be able to get a single user by id', async () => {
+    await request(app.server).post('/users').send({
+      name: 'New Test User',
+    })
+    await request(app.server).post('/users').send({
+      name: 'John Doe',
+    })
+
+    const listUsersResponse = await request(app.server).get('/users')
+    expect(listUsersResponse.statusCode).toEqual(200)
+    const { id } = listUsersResponse.body.users[1]
+
+    const listSingleUserResponse = await request(app.server).get(`/users/${id}`)
+    expect(listSingleUserResponse.statusCode).toEqual(200)
+    console.log(listSingleUserResponse.body)
+    expect(listSingleUserResponse.body.user).toEqual(
+      expect.objectContaining({
+        name: 'John Doe',
       }),
     )
   })
