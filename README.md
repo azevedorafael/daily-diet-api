@@ -20,3 +20,25 @@ https://efficient-sloth-d85.notion.site/Desafio-02-be7cdb37aaf74ba898bc6336427fa
   - Quantidade total de refeições fora da dieta
   - Melhor sequência por dia de refeições dentro da dieta
 - O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
+
+## Como rodar?
+
+```bash
+$ git clone https://github.com/azevedorafael/daily-diet-api
+
+$ cd daily-diet-api
+
+$ npm install
+
+$ npm run knex -- migrate:latest
+
+$ npm run dev
+
+# The server will start at port:3333
+```
+
+## Como testar?
+
+```bash
+$ npm test
+```
